@@ -5,7 +5,7 @@
 	script.src = "words-nl.js";
 	head.insertBefore(script, head.childNodes[3]);
 
-	head.innerHTML += "<style>table, th, td {border: 1px solid black; border-collapse: collapse;} .correct {background-color: orange;}</style>"
+	head.innerHTML += "<style>table, th, td {border: 1px solid black; border-collapse: collapse;} .correct {background-color: orange;} .place {border-radius: 50%;background-color: yellow;}input {width: 50px;height: 50px;font-size: 40px;text-align: center;}button {height: 56px;font-size: 30px;}</style>"
 })() // Initializing
 
 var gameId = 0;
@@ -40,31 +40,58 @@ function LingoGame (name, word, debug) {
 	}
 
 	this.start = function() {
-		document.body.innerHTML += "<table id=\"" + self.name + "\"><tr id=\"" + self.name + "-1.0\"><th><input id=\"" + self.name + "-1.1\" disabled></th><th><input id=\"" + self.name + "-1.2\" disabled></th><th><input id=\"" + self.name + "-1.3\" disabled></th><th><input id=\"" + self.name + "-1.4\" disabled></th><th><input id=\"" + self.name + "-1.5\" disabled></th><th><button id=\"" + self.name + "-1.6\" onclick=\"\" disabled>Check</button></th></tr>   <tr id=\"" + self.name + "-2.0\"><th><input id=\"" + self.name + "-2.1\" disabled></th><th><input id=\"" + self.name + "-2.2\" disabled></th><th><input id=\"" + self.name + "-2.3\" disabled></th><th><input id=\"" + self.name + "-2.4\" disabled></th><th><input id=\"" + self.name + "-2.5\" disabled></th><th><button id=\"" + self.name + "-2.6\" onclick=\"\" disabled>Check</button></th></tr>   <tr><th></th><th></th><th></th><th></th><th></th></tr>   <tr><th></th><th></th><th></th><th></th><th></th></tr>   <tr><th></th><th></th><th></th><th></th><th></th></tr></table>";
+		document.body.innerHTML += "<table id=\"" + self.name + "\"><tr id=\"" + self.name + "-1.0\"><th><input id=\"" + self.name + "-1.1\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-1.2\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-1.3\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-1.4\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-1.5\" maxlength=\"1\" disabled></th><th><button id=\"" + self.name + "-1.6\" onclick=\"\" maxlength=\"1\" disabled>Check</button></th></tr>   <tr id=\"" + self.name + "-2.0\"><th><input id=\"" + self.name + "-2.1\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-2.2\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-2.3\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-2.4\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-2.5\" maxlength=\"1\" disabled></th><th><button id=\"" + self.name + "-2.6\" onclick=\"\" maxlength=\"1\" disabled>Check</button></th></tr>   <tr id=\"" + self.name + "-3.0\"><th><input id=\"" + self.name + "-3.1\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-3.2\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-3.3\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-3.4\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-3.5\" maxlength=\"1\" disabled></th><th><button id=\"" + self.name + "-3.6\" onclick=\"\" maxlength=\"1\" disabled>Check</button></th></tr>   <tr id=\"" + self.name + "-4.0\"><th><input id=\"" + self.name + "-4.1\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-4.2\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-4.3\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-4.4\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-4.5\" maxlength=\"1\" disabled></th><th><button id=\"" + self.name + "-4.6\" onclick=\"\" maxlength=\"1\" disabled>Check</button></th></tr>   <tr id=\"" + self.name + "-5.0\"><th><input id=\"" + self.name + "-5.1\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-5.2\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-5.3\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-5.4\" maxlength=\"1\" disabled></th><th><input id=\"" + self.name + "-5.5\" maxlength=\"1\" disabled></th><th><button id=\"" + self.name + "-5.6\" onclick=\"\" maxlength=\"1\" disabled>Check</button></th></tr></table>";
 		
 		let firstLetter = document.getElementById(self.name + "-1.1");
 		firstLetter.setAttribute("value", this.wordArray[0]);
 		self.setDisable(1, false);
-		self.set(1.1, "correct");
+		self.set(self.name + "-1.1", "correct");
 		document.getElementById(this.name + "-1.6").onclick = function(){
 			self.setDisable(1, true);
 			self.setDisable(2, false);
+			self.check(1);
 		};
-
+		document.getElementById(this.name + "-2.6").onclick = function(){
+			self.setDisable(2, true);
+			self.setDisable(3, false);
+			self.check(2);
+		};
+		document.getElementById(this.name + "-3.6").onclick = function(){
+			self.setDisable(3, true);
+			self.setDisable(4, false);
+			self.check(3);
+		};
+		document.getElementById(this.name + "-4.6").onclick = function(){
+			self.setDisable(4, true);
+			self.setDisable(5, false);
+			self.check(4);
+		};
+		document.getElementById(this.name + "-2.6").onclick = function(){
+			self.setDisable(5, true);
+			self.check(5);
+		};
 	}
 	this.check = function(id) {
-		let fields = [self.name + "-" + id + ".0", self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5", self.name + "-" + id + ".6"]
-		
+		let fields = [
+		self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5"]
+		for (i = 0; i < fields.length; i++) {
+			if (debug == true || word == true) {console.log("Word field (" + i + "): " + document.getElementById(fields[i]).value)};
+			if (document.getElementById(fields[i]).value == self.wordArray[i]) {
+				self.set(fields[i], "correct");
+			}else if (self.wordArray.indexOf(document.getElementById(fields[i]).value) != -1) {
+				self.set(fields[i], "place")
+			}
+		}
 	}
 	this.set = function(idId, action) { // Example: 3.4 (First attempt, fourth word), action: Correct: The letter is at the correct place, place: the letter is in the word.
-		let id = self.name + "-" + idId;
+		// let id = self.name + "-" + idId;
+		let id = idId;
 		if (action == "correct") {
 			document.getElementById(id).setAttribute("class", "correct");
 		} else if (action == "place") {
 			document.getElementById(id).setAttribute("class", "place");
 		}
 	}
-
 	if (debug == true || word == true) {console.log(self)};
 };
 
