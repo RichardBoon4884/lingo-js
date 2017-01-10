@@ -347,7 +347,7 @@ var wordsNL = [
 	"stook",
 	"steek",
 	"schep",
-	"spijs",
+	// "spijs",
 	"stoep",
 	"shirt",
 	"samen",

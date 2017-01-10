@@ -66,7 +66,7 @@ function LingoGame (name, word, debug) {
 			self.setDisable(5, false);
 			self.check(4);
 		};
-		document.getElementById(this.name + "-2.6").onclick = function(){
+		document.getElementById(this.name + "-5.6").onclick = function(){
 			self.setDisable(5, true);
 			self.check(5);
 		};
@@ -75,7 +75,7 @@ function LingoGame (name, word, debug) {
 		let fields = [
 		self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5"]
 		for (i = 0; i < fields.length; i++) {
-			if (debug == true || word == true) {console.log("Word field (" + i + "): " + document.getElementById(fields[i]).value)};
+			if (debug == true || word == true) {console.log("Word field (" + id + "." + i + "): " + document.getElementById(fields[i]).value)};
 			if (document.getElementById(fields[i]).value == self.wordArray[i]) {
 				self.set(fields[i], "correct");
 			}else if (self.wordArray.indexOf(document.getElementById(fields[i]).value) != -1) {
@@ -83,7 +83,7 @@ function LingoGame (name, word, debug) {
 			}
 		}
 	}
-	this.set = function(idId, action) { // Example: 3.4 (First attempt, fourth word), action: Correct: The letter is at the correct place, place: the letter is in the word.
+	this.set = function(idId, action) { // Example: 3.4 (First attempt, fourth word), action: Correct: The letter is at the correct place. Place: the letter is in the word.
 		// let id = self.name + "-" + idId;
 		let id = idId;
 		if (action == "correct") {
