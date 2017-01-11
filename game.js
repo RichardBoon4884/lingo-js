@@ -1,9 +1,11 @@
 (function() {
 	let head = document.getElementsByTagName('head')[0];
+	let headScript = document.getElementsByTagName('script')[0];
 	let script = document.createElement('script');
 	script.type = "text/javascript";
 	script.src = "words-nl.js";
-	head.insertBefore(script, head.childNodes[3]);
+	headScript.insertBefore(script, headScript.childNodes[3]);
+	headScript.parentNode.insertBefore(script, headScript.nextSibling);
 
 	head.innerHTML += "<style>table, th, td {border: 1px solid black; border-collapse: collapse;} .correct {background-color: orange;} .place {border-radius: 50%;background-color: yellow;}input {width: 50px;height: 50px;font-size: 40px;text-align: center;}button {height: 56px;font-size: 30px;}.field {width: 56px;}.button {width: 103.317px;}</style>"
 })() // Initializing
