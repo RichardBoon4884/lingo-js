@@ -145,6 +145,6 @@ function LingoGame (name, word, debug) {
 };
 
 window.onload = function() {
-	game1 = new LingoGame("game1", false);
+	game1 = new LingoGame("game1");
 	game1.start();
 };
