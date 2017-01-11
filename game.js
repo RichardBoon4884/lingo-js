@@ -101,7 +101,7 @@ function LingoGame (name, word, debug) {
 		};
 	}
 	this.check = function(id) {
-		let fields = [self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5"]
+		let fields = [self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5"];
 		let result;
 		for (i = 0; i < fields.length; i++) {
 			if (debug == true || word == true) {console.log("Word field (" + id + "." + i + "): " + document.getElementById(fields[i]).value)};
@@ -119,7 +119,6 @@ function LingoGame (name, word, debug) {
 		return result;
 	}
 	this.set = function(idId, action) { // Example: 3.4 (First attempt, fourth word), action: Correct: The letter is at the correct place. Place: the letter is in the word.
-		// var id = self.name + "-" + idId;
 		var id = idId;
 		if (action == "correct") {
 			document.getElementById(id).setAttribute("class", "correct");
@@ -146,6 +145,6 @@ function LingoGame (name, word, debug) {
 };
 
 window.onload = function() {
-	game1 = new LingoGame("game1", true);
+	game1 = new LingoGame("game1", false);
 	game1.start();
 };
