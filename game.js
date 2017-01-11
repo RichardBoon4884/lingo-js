@@ -89,8 +89,6 @@ function LingoGame (name, word, debug) {
 		document.getElementById(this.name + "-5.6").onclick = function(){
 			self.setDisable(5, true);
 			let result = self.check(5);
-			console.log(result);
-			console.log(self.word);
 			if (result == self.word) {
 				if (debug == true || word == true) {console.log("Word correct!")};
 				self.endGame("correct");
@@ -119,8 +117,8 @@ function LingoGame (name, word, debug) {
 		return result;
 	}
 	this.set = function(idId, action) { // Example: 3.4 (First attempt, fourth word), action: Correct: The letter is at the correct place. Place: the letter is in the word.
-		// let id = self.name + "-" + idId;
-		let id = idId;
+		// var id = self.name + "-" + idId;
+		var id = idId;
 		if (action == "correct") {
 			document.getElementById(id).setAttribute("class", "correct");
 		} else if (action == "place") {
@@ -128,11 +126,18 @@ function LingoGame (name, word, debug) {
 		}
 	}
 	this.endGame = function(condition) {
+		var game = document.getElementById(self.name);
+		var element = document.createElement("h2");
 		if (condition == "correct") {
-			var head = document.getElementById(self.name);
-			// head.innerHTML += "<tfoot><tr><th><h2 style=\"width:401.317px;\">Je hebt het woord geraden!</h2></tr></th></tfoot>";
+			element.innerHTML = "Je hebt het woord geraden!";
+			game.parentNode.insertBefore(element, game.nextSibling);
+			
 		} else if (condition == "incorrect") {
-
+			element.innerHTML = "Helaas, je hebt het woord niet weten te raden.";
+			var element1 = document.createElement("p");
+			element1.innerHTML = "Het woord was: '" + self.word + "'.";
+			game.parentNode.insertBefore(element, game.nextSibling);
+			element.parentNode.insertBefore(element1, element.nextSibling);
 		}
 	}
 	if (debug == true || word == true) {console.log(self)};
