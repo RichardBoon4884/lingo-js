@@ -103,11 +103,13 @@ function LingoGame (name, word, debug) {
 	this.check = function(id) {
 		let fields = [self.name + "-" + id + ".1", self.name + "-" + id + ".2", self.name + "-" + id + ".3", self.name + "-" + id + ".4", self.name + "-" + id + ".5"];
 		let result;
+		let toCheck = this.wordArray.slice();
 		for (i = 0; i < fields.length; i++) {
 			if (debug == true || word == true) {console.log("Word field (" + id + "." + i + "): " + document.getElementById(fields[i]).value)};
 			if (document.getElementById(fields[i]).value == self.wordArray[i]) {
 				self.set(fields[i], "correct");
-			}else if (self.wordArray.indexOf(document.getElementById(fields[i]).value) != -1) {
+				toCheck[i] = null;
+			}else if (toCheck.indexOf(document.getElementById(fields[i]).value) != -1) {
 				self.set(fields[i], "place")
 			}
 			if (result == undefined) {
